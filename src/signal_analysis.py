@@ -10,8 +10,8 @@ def data_for_spectrum(data, fs):
     return fft_res, wave_freqs
 
 
-def spectrum(data, fs):
-    fft_res, wave_freqs = data_for_spectrum(data, fs)
+def spectrum(data, samplerate):
+    fft_res, wave_freqs = data_for_spectrum(data, samplerate)
 
     plt.subplot(1, 2, 1)
     plt.plot(wave_freqs[:int(len(wave_freqs) / 2)], 20 * np.log10(fft_res)[:int(len(fft_res) / 2)])
@@ -20,7 +20,7 @@ def spectrum(data, fs):
     plt.title("Signal spectrum")
 
     plt.subplot(1, 2, 2)
-    plt.plot(np.linspace(0, len(data) / fs, len(data)), data)
+    plt.plot(data)
     plt.ylabel("Amplitude")
     plt.xlabel("Time [s]")
     plt.title("Signal")
@@ -36,3 +36,10 @@ def spectrogram(yaxis):
     plt.show()
 
     return f, t, Sxx
+
+
+def display_signal(data, samplerate):
+    plt.plot(np.linspace(0, len(data) / samplerate, len(data)), data)
+    plt.ylabel("Amplitude")
+    plt.xlabel("Time [s]")
+    plt.title("Signal")
